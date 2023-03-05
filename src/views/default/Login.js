@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import * as Yup from 'yup';
@@ -6,11 +6,12 @@ import { useFormik } from 'formik';
 import LayoutFullpage from 'layout/LayoutFullpage';
 import CsLineIcons from 'cs-line-icons/CsLineIcons';
 import HtmlHead from 'components/html-head/HtmlHead';
+import { useDispatch } from 'react-redux';
 import {firebase} from '../../firebase';
+import { setCurrentUser } from '../../auth/authSlice';
 
-const {app, getAuth, GoogleAuthProvider, signInWithRedirect, signInWithPopup} = firebase;
-
-const googleConnect    = () => {
+const {app, getAuth, GoogleAuthProvider, signInWithRedirect, signInWithPopup, signInWithEmailAndPassword} = firebase;
+const googleConnect = () => {
     const auth = getAuth(app);
     console.log('googleConnect', auth);
     const provider = new GoogleAuthProvider();
@@ -19,7 +20,11 @@ const googleConnect    = () => {
     });
 };
 
+
+
 const Login = () => {
+    const [errorMessage, setErrorMessage] = useState(null);
+  const dispatch = useDispatch();
   const title = 'Login';
   const description = 'Login Page';
 
@@ -28,7 +33,19 @@ const Login = () => {
     password: Yup.string().min(6, 'Must be at least 6 chars!').required('Password is required'),
   });
   const initialValues = { email: '', password: '' };
-  const onSubmit = (values) => console.log('submit form', values);
+    const onSubmit = async(values) => {
+        const auth = getAuth();
+
+        try {
+            const { email, password } = values;
+            const { user } = await signInWithEmailAndPassword(auth, email, password);
+            dispatch(setCurrentUser(user));
+        } catch (error) {
+            setErrorMessage(error.message.replace('Firebase:',''));
+            console.error(error);
+        }
+        console.log('submit form', values);
+    };
 
   const formik = useFormik({ initialValues, validationSchema, onSubmit });
   const { handleSubmit, handleChange, values, touched, errors } = formik;
@@ -79,6 +96,7 @@ const Login = () => {
               <CsLineIcons icon="email" />
               <Form.Control type="text" name="email" placeholder="Email" value={values.email} onChange={handleChange} />
               {errors.email && touched.email && <div className="d-block invalid-tooltip">{errors.email}</div>}
+                {errorMessage && <div className="d-block invalid-tooltip">{errorMessage}</div>}
             </div>
             <div className="mb-3 filled form-group tooltip-end-top">
               <CsLineIcons icon="lock-off" />
