@@ -11,14 +11,19 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setCurrentUser(state, action) {
-      console.log(action);
       state.currentUser = action.payload;
       state.isLogin = true;
+    },
+    logout(state) {
+      state.currentUser = {};
+      state.isLogin = false;
     },
   },
 });
 
-export const { setCurrentUser } = authSlice.actions;
+export const { setCurrentUser, logout } = authSlice.actions;
+// (state) => state.auth
+export const sign = (state) => state.auth;
 const authReducer = authSlice.reducer;
 
 export default authReducer;

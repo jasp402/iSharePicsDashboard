@@ -14,6 +14,7 @@ export const REACT_HELMET_PROPS = {
 export const DEFAULT_PATHS = {
   APP: '/',
   LOGIN: '/login',
+  LOGOUT: '/logout',
   REGISTER: '/register',
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
@@ -37,7 +38,7 @@ export const DEFAULT_USER = {
   id: 1,
   name: 'Lisa Jackson',
   thumb: '/img/profile/profile-9.webp',
-  role: USER_ROLE.Admin,
+  role: USER_ROLE.Editor,
   email: 'lisajackson@gmail.com',
 };
 

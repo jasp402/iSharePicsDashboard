@@ -6,12 +6,8 @@ import { useFormik } from 'formik';
 import LayoutFullpage from 'layout/LayoutFullpage';
 import CsLineIcons from 'cs-line-icons/CsLineIcons';
 import HtmlHead from 'components/html-head/HtmlHead';
-import {firebase} from "../../firebase";
-
-const {getAuth, createUserWithEmailAndPassword} = firebase;
 
 const Register = () => {
-  const auth = getAuth();
   const title = 'Register';
   const description = 'Register Page';
 
@@ -22,15 +18,7 @@ const Register = () => {
     terms: Yup.bool().required().oneOf([true], 'Terms must be accepted'),
   });
   const initialValues = { name: '', email: '', password: '', terms: false };
-  const onSubmit = (values) => {
-    console.log('submit form', values);
-    const { name, email, password, terms } = values;
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const {user} = userCredential;
-          console.log('user', user);
-        });
-  }
+  const onSubmit = (values) => console.log('submit form', values);
 
   const formik = useFormik({ initialValues, validationSchema, onSubmit });
   const { handleSubmit, handleChange, values, touched, errors } = formik;
