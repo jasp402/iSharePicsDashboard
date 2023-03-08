@@ -140,6 +140,7 @@ const enMessages = {
   'menu.shipping': 'es|Shipping',
   'menu.discount': 'es|Discount',
   'menu.general': 'es|General',
+  'menu.pulse': 'es|Pulse',
 
   'menu.upgrade': 'es|Upgrade',
   'menu.community': 'es|Community',

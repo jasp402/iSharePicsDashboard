@@ -31,7 +31,7 @@ export const DEFAULT_SETTINGS = {
   RADIUS: RADIUS.Rounded,
   COLOR: THEME_COLOR.LightBlue,
   NAV_COLOR: NAV_COLOR.Default,
-  USE_SIDEBAR: false,
+  USE_SIDEBAR: true,
 };
 
 export const DEFAULT_USER = {

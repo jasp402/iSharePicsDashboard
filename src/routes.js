@@ -158,6 +158,15 @@ const interfaces = {
         },
     },
 };
+const storefront = {
+    home: lazy(() => import('views/storefront/home/Home')),
+    filters: lazy(() => import('views/storefront/filters/Filters')),
+    categories: lazy(() => import('views/storefront/categories/Categories')),
+    detail: lazy(() => import('views/storefront/detail/Detail')),
+    cart: lazy(() => import('views/storefront/cart/Cart')),
+    checkout: lazy(() => import('views/storefront/checkout/Checkout')),
+    invoice: lazy(() => import('views/storefront/invoice/Invoice')),
+};
 
 const appRoot = DEFAULT_PATHS.APP.endsWith('/') ? DEFAULT_PATHS.APP.slice(1, DEFAULT_PATHS.APP.length) : DEFAULT_PATHS.APP;
 
@@ -167,10 +176,10 @@ const routesAndMenuItems = {
             path    : DEFAULT_PATHS.APP,
             exact   : true,
             redirect: true,
-            to      : `${appRoot}/dashboards/default`,
+            to      : `${appRoot}/storefront/detail`,
             roles    : [USER_ROLE.Admin],
         },
-        {
+       /* {
             path     : `${appRoot}/dashboards`,
             component: dashboards.index,
             label    : 'menu.dashboards',
@@ -491,6 +500,28 @@ const routesAndMenuItems = {
                         },
                     ],
                 },
+            ],
+        },*/
+        {
+            path: `${appRoot}/storefront`,
+            exact: true,
+            redirect: true,
+            to: `${appRoot}/pulse/home`,
+            label: 'menu.pulse',
+            icon: 'activity',
+            subs: [
+                { path: '/detail', label: 'menu.detail', component: storefront.detail},
+            ],
+        },
+        {
+            path: `${appRoot}/chat`,
+            exact: true,
+            redirect: true,
+            to: `${appRoot}/app/home`,
+            label: 'menu.chat',
+            icon: 'message',
+            subs: [
+                {path: '/chat', label: 'menu.chat', component: apps.chat},
             ],
         },
     ],

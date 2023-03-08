@@ -40,6 +40,7 @@
     "react-albus": "^2.0.0",
     "react-autosuggest": "^10.1.0",
     "react-bootstrap": "^2.0.0-rc.0",
+    "react-bootstrap-icons": "^1.10.2",
     "react-circular-progressbar": "^2.0.4",
     "react-contexify": "^5.0.0",
     "react-countdown": "^2.3.2",
