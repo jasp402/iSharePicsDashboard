@@ -237,17 +237,15 @@ const Detail = () => {
                   </Col>
                 </Row>
 
-                <p className="mt-2 mb-4">
-                  <footer className="blockquote-footer">
-                    Soy una persona creativa y apasionada por el arte y el diseño. Me gusta pasar tiempo en museos y galerías de arte, pero también disfruto de
-                    una buena película o serie en Netflix. Me encanta la música y toco la guitarra en mi tiempo libre. Estoy buscando a alguien con quien pueda
-                    compartir mi amor por la creatividad y la cultura.
-                    <br />
-                    <cite title="Source Title">
-                      <strong>Carmen Elena (24)</strong>
-                    </cite>
-                  </footer>
-                </p>
+                <footer className="mt-2 mb-4 blockquote-footer">
+                  Soy una persona creativa y apasionada por el arte y el diseño. Me gusta pasar tiempo en museos y galerías de arte, pero también disfruto de
+                  una buena película o serie en Netflix. Me encanta la música y toco la guitarra en mi tiempo libre. Estoy buscando a alguien con quien pueda
+                  compartir mi amor por la creatividad y la cultura.
+                  <br />
+                  <cite title="Source Title">
+                    <strong>Carmen Elena (24)</strong>
+                  </cite>
+                </footer>
               </div>
               <div>
                 <Button variant="outline-primary" className="btn-icon btn-icon-end mb-1">
