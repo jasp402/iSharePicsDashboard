@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Rating from 'react-rating';
 import Lightbox from 'react-image-lightbox';
-import { Row, Col, Button, Dropdown, Card, Form, Spinner, ProgressBar, Badge } from 'react-bootstrap';
+import { Row, Col, Button, Dropdown, Card, Spinner } from 'react-bootstrap';
 import HtmlHead from 'components/html-head/HtmlHead';
 import CsLineIcons from 'cs-line-icons/CsLineIcons';
 import * as Icon from 'react-bootstrap-icons';
 import GlideGallery from 'components/carousel/GlideGallery';
-import Clamp from 'components/clamp';
 import 'react-image-lightbox/style.css';
 
 const Detail = () => {
@@ -35,22 +34,6 @@ const Detail = () => {
       large: 'https://i.pinimg.com/564x/ee/61/b6/ee61b63841830aeba32146c9e2cf0217.jpg',
       thumb: 'https://i.pinimg.com/564x/ee/61/b6/ee61b63841830aeba32146c9e2cf0217.jpg',
     },
-  ];
-
-  const [valueSize, setValueSize] = useState();
-  const optionsSize = [
-    { value: 'S', label: 'S' },
-    { value: 'M', label: 'M' },
-    { value: 'L', label: 'L' },
-    { value: 'XL', label: 'XL' },
-  ];
-
-  const [valueQuantity, setValueQuantity] = useState();
-  const optionsQuantity = [
-    { value: '1', label: '1' },
-    { value: '2', label: '2' },
-    { value: '3', label: '3' },
-    { value: '4', label: '4' },
   ];
 
   const [photoIndex, setPhotoIndex] = useState(0);
@@ -102,10 +85,8 @@ const Detail = () => {
         <Card.Body>
           <Row className="g-5">
             <Col xl="7" className="position-relative">
-
               <span className="badge rounded-pill bg-primary me-1 position-absolute e-n1 t-3 z-index-1 py-2 px-3">
-                <CsLineIcons icon="crown" size="15" className="text-white" />
-                {" "} Popular
+                <CsLineIcons icon="crown" size="15" className="text-white" /> Popular
               </span>
               <GlideGallery>
                 <GlideGallery.LargeItems>
@@ -132,8 +113,7 @@ const Detail = () => {
             <Col xl="5" className="sh-xl-60 d-flex flex-column justify-content-between">
               <div>
                 <Button variant="link" className="mb-1 d-inline-block text-small p-0">
-                  <CsLineIcons icon="gear" size="17" className="text-primary" />
-                  {" "}Adjust preferences
+                  <CsLineIcons icon="gear" size="17" className="text-primary" /> Adjust preferences
                 </Button>
                 <h4 className="mb-2">Stephanie Salazar (24)</h4>
                 <div className="mb-4">
@@ -199,7 +179,6 @@ const Detail = () => {
                         </Col>
                         <Col className="text-alternate">Arte, diseño, música, cine, leer, viajar</Col>
                       </Row>
-
                     </div>
                   </Col>
                   <Col xs="auto">
@@ -259,10 +238,15 @@ const Detail = () => {
                 </Row>
 
                 <p className="mt-2 mb-4">
-                  <footer className="blockquote-footer">Soy una persona creativa y apasionada por el arte y el diseño. Me gusta pasar tiempo en museos y galerías de arte, pero también disfruto de
-                  una buena película o serie en Netflix. Me encanta la música y toco la guitarra en mi tiempo libre. Estoy buscando a alguien con quien pueda
-                  compartir mi amor por la creatividad y la cultura.<br/>
-                    <cite title="Source Title"><strong>Carmen Elena (24)</strong></cite></footer>
+                  <footer className="blockquote-footer">
+                    Soy una persona creativa y apasionada por el arte y el diseño. Me gusta pasar tiempo en museos y galerías de arte, pero también disfruto de
+                    una buena película o serie en Netflix. Me encanta la música y toco la guitarra en mi tiempo libre. Estoy buscando a alguien con quien pueda
+                    compartir mi amor por la creatividad y la cultura.
+                    <br />
+                    <cite title="Source Title">
+                      <strong>Carmen Elena (24)</strong>
+                    </cite>
+                  </footer>
                 </p>
               </div>
               <div>
@@ -281,7 +265,6 @@ const Detail = () => {
         </Card.Body>
       </Card>
       {/* Product End */}
-
 
       {/* Lightbox Start */}
       {isOpen && (

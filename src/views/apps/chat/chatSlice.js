@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { SERVICE_URL } from 'config.js';
 import axios from 'axios';
+import { db, ref as sRef, get } from '../../../firebase';
 
 const initialState = {
   items: [],
@@ -44,10 +45,46 @@ const { setLoading, receiveService } = chatSlice.actions;
 
 export const { chatChangeMode, chatSetSelectedChat, chatSetSelectedTab, chatSetCurrentCall } = chatSlice.actions;
 
+async function getPrivateRoomsDetails(gid) {
+  const privateRoomsRef = sRef(db, 'privateRoom');
+  const privateRoomsSnapshot = await get(privateRoomsRef);
+  const privateRooms = privateRoomsSnapshot.val();
+  const rooms = [];
+  // eslint-disable-next-line no-restricted-syntax,guard-for-in
+  for (const room in privateRooms) {
+    const { first, second } = privateRooms[room];
+    if (first === gid) {
+      const userGid = first === gid ? second : first;
+      const userRef = sRef(db, `users/${userGid}`);
+      // eslint-disable-next-line no-await-in-loop
+      const userSnapshot = await get(userRef);
+      const userDetails = userSnapshot.val();
+      rooms.push({
+        id: second,
+        name: userDetails.displayName,
+        thumb: userDetails.photoURL,
+        status: 'online',
+        unread: 0,
+        last: 'Today 10:40',
+        messages: [
+          {
+            text: 'Hello there!',
+            time: '17:20',
+            type: 'response',
+            attachments: [],
+          },
+        ],
+      });
+    }
+  }
+  console.log('rooms', JSON.stringify(rooms));
+  return {data: rooms};
+}
+
 export const getItems = () => async (dispatch, getState) => {
   const state = getState();
   dispatch(setLoading(true));
-  const response = await axios.get(`${SERVICE_URL}/apps/chat`);
+  const response = await getPrivateRoomsDetails('739001');
   const items = response.data;
   dispatch(receiveService({ items, loading: false }));
   if (state.chat.selectedChat === null) dispatch(chatSetSelectedChat(items.filter((x) => x.messages.length > 0)[0]));

@@ -23,7 +23,7 @@ const Login = () => {
   });
   const initialValues = { email: '', password: '' };
   const onSubmit = (values) => console.log('submit form', values);
-  const googleConnect = async() => {
+  const googleConnect = async () => {
     const provider = new GoogleAuthProvider();
     const { user } = await signInWithPopup(auth, provider);
     const res = await getID(user);
